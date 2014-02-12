@@ -165,7 +165,11 @@
 	      }
 	    }
 //Thea's code ends here
-
+//Ara's codes as of 2/11/14
+	    public function delete_bookmark($accession_number, $email){
+	    	$statement ="DELETE FROM bookmark WHERE (\"$email\", \"$accession_number\") ";
+	    	$this->db->query($statement);
+	    }
 	}
 
 ?>

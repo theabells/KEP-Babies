@@ -86,5 +86,12 @@ class Site extends CI_Controller {
 			$this->get_database->update_book_author($accession_number,$author);
 	}
 //Thea's codes ends here
+//Ara's codes as of 2/11/14	
+	public function remove_bookmark(){
+		$accession_number= $this->input->post('accession_number');
+		$email= $this->input->post('email');
+		$this->get_database->delete_bookmark($accession_number,$email);
+		echo "Book removed from My Library.";
+		$this->load->view('home_view');
 
 }

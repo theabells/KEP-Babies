@@ -167,7 +167,7 @@
 //Thea's code ends here
 //Ara's codes as of 2/11/14
 	    public function delete_bookmark($accession_number, $email){
-	    	$statement ="DELETE FROM bookmark WHERE  email = $email and accession_number=$accession_number ";
+	    	$statement ="DELETE FROM bookmark WHERE  email = \"$email\" and accession_number= \"$accession_number\" ";
 	    	$this->db->query($statement);
 	    }
 	}

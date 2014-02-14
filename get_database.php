@@ -134,6 +134,7 @@
 			return $query->result();
 
 		}
+//Start of update book details
 //Thea's code starts here
 		public function get_book_details($accession_number){
 			
@@ -165,6 +166,10 @@
 	      }
 	    }
 //Thea's code ends here
+//end of Update book details functions
+
+
+//Start of My library functions
 //Ara's codes as of 2/11/14
 	    public function delete_bookmark($accession_number, $email){
 	    	$statement ="DELETE FROM bookmark WHERE  email = \"$email\" and accession_number= \"$accession_number\" ";
@@ -197,10 +202,26 @@
    				echo 'Book Added!';
    			}
 	    }
+//End of my library functions	    
+//Start of user update account functions	    
+	    public function get_user_details($email){
 
-	}
+		$data = current($this->db->get_where('user',Array('email'=>$email))->result_array());
+		return $data;
+	    }
 
-?>
+	    public function update_user_details($email,$data){
+		$this->db->where('email',$email);
+		if(!$this->db->update('user',$data)){
+			return -1;
+		}
+		else{
+			return 1;
+		}
+
+	    }
+//End of user update account
+
 	}
 
 ?>

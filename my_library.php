@@ -21,7 +21,9 @@
 							echo "</ul>";
 						echo "</div>";
 						?>
-						<form method="post" accept-charset="utf-8" action="http://localhost/cmsc128/index.php/site/delete_bookmark">
+						<form method="post" accept-charset="utf-8" action="http://localhost/cmsc128/index.php/site/remove_bookmark">
+							<input type="hidden" value="<?php echo $row->accession_number; ?>" id="accession_number" name="accession_number">
+							<input type="hidden" value="gjpgagno@gmail.com" id="email" name="email"><!-- Hard coded email; MUST change to session-->
 							<input type="submit" value="Remove bookmark"/>
 						</form>
 						<?php

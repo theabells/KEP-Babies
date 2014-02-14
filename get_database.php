@@ -170,6 +170,37 @@
 	    	$statement ="DELETE FROM bookmark WHERE  email = \"$email\" and accession_number= \"$accession_number\" ";
 	    	$this->db->query($statement);
 	    }
+//Thea's codes as of 2/9/14; edited by Tim
+	    public function get_bookmarks($email){
+	    	$statement ="SELECT accession_number,publisher, title from material where accession_number in (SELECT accession_number FROM bookmark where email=\"$email\")";
+	    	$query = $this->db->query($statement);
+
+	    	return $query->result();
+	    }
+	    public function get_author_for_bookmarks($email){
+	    	$statement ="SELECT * from material_author where accession_number in (SELECT accession_number from bookmark where email=\"$email\")";
+	    	$query = $this->db->query($statement);
+
+	    	return $query->result();
+	    }
+
+	    public function add_bookmark($accession_number, $email){
+			$this->db->select('accession_number');		//selects accession number
+			$this->db->where(array('accession_number'=>$accession_number));		//checks if accession_number is equal to inputted accession_number
+			$query = $this->db->get('bookmark');	//get values from bookmark
+   			if($query->num_rows>0){			//gets the number of accession_number equal to the input in which num_rows>1 determines duplicate
+   				echo 'Cannot be added! Book already exists.';	//notifies if there is duplicate
+   			}
+   			else{
+				$statement ="INSERT into bookmark values (\"$email\", \"$accession_number\") ";		//if no duplicate, insert into database
+   				$this->db->query($statement);
+   				echo 'Book Added!';
+   			}
+	    }
+
+	}
+
+?>
 	}
 
 ?>

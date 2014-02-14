@@ -86,6 +86,26 @@ class Site extends CI_Controller {
 			$this->get_database->update_book_author($accession_number,$author);
 	}
 //Thea's codes ends here
+
+//Start of my library functions
+
+//Thea's code as of 2/9/14
+	public function get_my_library_data(){
+		$email= "tempmail@gmail.com";//$this->input->session('email');
+		$data['results']=$this->get_database->get_bookmarks($email);
+		$data['results2']=$this->get_database->get_author_for_bookmarks($email);
+		$this->load->view('my_library', $data);
+	}
+
+	public function bookmark(){
+		$accession_number= $this->input->post('accession_number');
+		$email= $this->input->post('email');
+		$this->get_database->add_bookmark($accession_number,$email);
+//			echo "Book added";												//I commented this out because checking and notifying duplicates are in function add_bookmark()
+		$this->load->view('home_view');
+	}
+//End of Thea's code as of 2/9/14
+
 //Ara's codes as of 2/11/14	
 	public function remove_bookmark(){
 		$accession_number= $this->input->post('accession_number');
@@ -93,5 +113,26 @@ class Site extends CI_Controller {
 		$this->get_database->delete_bookmark($accession_number,$email);
 		echo "Book removed from My Library.";
 		$this->load->view('home_view');
+	}
+//end of my library functions
+
+//Start of user_update functions
+	public function user_update_view(){
+		$data['results'] = $this->get_database->get_user_details('test@gmail.com');	//user must be in session, change email, get email of user in session
+		$this->load->view('user_update', $data);
+
+	}
+
+	public function update(){
+		$input = $this->input->post();
+		//print_r($input); die();
+		$update = $this->get_database->update_user_details($input['email'],$input);
+		if($update == 1){
+			echo 'update successful!';
+		}else{
+			echo 'error occured';
+		}
+	}
+//end of user update functions
 
 }

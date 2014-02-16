@@ -4,11 +4,15 @@
         <title>Edit Account Details</title> 
         <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.css"> 
         <script type="text/javascript" language="javascript" src="<?php echo base_url();?>assets/js/jquery-2.0.3.min.js"></script> 
+        <script type="text/javascript">
+            var str="<?php echo $results['degree_program'];?>";
+            document.getElementById("<?php echo $results['degree_program'];?>").selected=true;
+        </script>
     </head> 
   
     <body> 
         <div> 
-            <form name="user_update" method="POST" action="<?php echo base_url();?>index.php/site/update/" onsubmit="return validate_update();"> 
+            <form name="user_update" method="POST" action="<?php echo base_url();?>index.php/site/update_account" onsubmit="return validate_update();"> 
                 <input type="hidden" id="user" name="email" value="<?php  echo($results['email'] != ''?$results['email']:'');?>"/> 
                   
                 <label>First name: </label> <input class="textfield" type="text" placeholder="First name" id="first_name" name="first_name" value="<?php echo($results['first_name'] != '')?$results['first_name']:'';?>"/> 
@@ -24,16 +28,54 @@
                 <label>Student number: </label> <input class="textfield" type="text" placeholder="####-#####" id="student_number" name="student_number" value="<?php echo($results['student_number'] != ''?$results['student_number']:'');?>"/> 
                 <br> 
                   
-                <label>Degree: </label> <input class="textfield" type="text" placeholder="BSCS" id="degree_program" name="degree_program" value="<?php echo($results['degree_program'] != ''?$results['degree_program']:'');?>"/> 
+                   <label for="degree_program">Degree Program</label>
+                                        <select name="degree_program" class="form-control input-lg">
+                                            <option value="BSABM" <?php echo($results['degree_program'] == 'BSABM')?'selected':'';?> >BS Agribusiness Management</option>
+                                            <option value="BSABT" <?php echo($results['degree_program'] == 'BSABT')?'selected':'';?> >BS Agricultural Biotechnology</option>
+                                            <option value="BSAgChem" <?php echo($results['degree_program'] == 'BSAgChem')?'selected':'';?> >BS Agricultural Chemistry</option>
+                                            <option value="BSAgEcon" <?php echo($results['degree_program'] == 'BSAgEcon')?'selected':'';?> >BS Agricultural Economics</option>
+                                            <option value="BSABE" <?php echo($results['degree_program'] == 'BSABE')?'selected':'';?> >BS Agricultural and Biosystems Engineering</option>
+                                            <option value="BSA" <?php echo($results['degree_program'] == 'BSA')?'selected':'';?> >BS Agriculture</option>
+                                            <option value="BSAMATH" <?php echo($results['degree_program'] == 'BSAMATH')?'selected':'';?> >BS Applied Mathematics</option>
+                                            <option value="BSAPhy" <?php echo($results['degree_program'] == 'BSAPhy')?'selected':'';?> >BS Applied Physics</option>
+                                            <option value="BSBio" <?php echo($results['degree_program'] == 'BSBio')?'selected':'';?> >BS Biology</option>
+                                            <option value="BSChemEng" <?php echo($results['degree_program'] == 'BSChemEng')?'selected':'';?> >BS Chemical Engineering</option>
+                                            <option value="BSChem" <?php echo($results['degree_program'] == 'BSChem')?'selected':'';?> >BS Chemistry</option>
+                                            <option value="BSCE" <?php echo($results['degree_program'] == 'BSCE')?'selected':'';?> >BS Civil Engineering</option>
+                                            <option value="BAComArts" <?php echo($results['degree_program'] == 'BAComArts')?'selected':'';?> >BA Communication Arts</option>
+                                            <option value="BSCS" <?php echo($results['degree_program'] == 'BSCS')?'selected':'';?> >BS Computer Science</option>
+                                            <option value="BSDevCom" <?php echo($results['degree_program'] == 'BSDevCom')?'selected':'';?> >BS Development Communication</option>
+                                            <option value="BSEcon" <?php echo($results['degree_program'] == 'BSEcon')?'selected':'';?> >BS Economics</option>
+                                            <option value="BSEE" <?php echo($results['degree_program'] == 'BSEE')?'selected':'';?> >BS Electrical Engineering</option>
+                                            <option value="BSFT" <?php echo($results['degree_program'] == 'BSFT')?'selected':'';?> >BS Food Technology</option>
+                                            <option value="BSF" <?php echo($results['degree_program'] == 'BSF')?'selected':'';?> >BS Forestry</option>
+                                            <option value="BSHumanEco" <?php echo($results['degree_program'] == 'BSHumanEco')?'selected':'';?> >BS Human Ecology</option>
+                                            <option value="BSIE" <?php echo($results['degree_program'] == 'BSIE')?'selected':'';?> >BS Industrial Engineering</option>
+                                            <option value="BSMATH" <?php echo($results['degree_program'] == 'BSMATH')?'selected':'';?> >BS Mathematics</option>
+                                            <option value="BSMST"<?php echo($results['degree_program'] == 'BSMST')?'selected':'';?> >BS Mathematics and Science Teaching</option>
+                                            <option value="BSN" <?php echo($results['degree_program'] == 'BSN')?'selected':'';?> >BS Nutrition</option>
+                                            <option value="BAPhilo" <?php echo($results['degree_program'] == 'BAPhilo')?'selected':'';?> >BA Philosophy</option>
+                                            <option value="BASocio" <?php echo($results['degree_program'] == 'BASocio')?'selected':'';?> >BA Sociology</option>
+                                            <option value="BSSTAT" <?php echo($results['degree_program'] == 'BSSTAT')?'selected':'';?> >BS Statistics</option>
+                                            <option value="DVetMed" <?php echo($results['degree_program'] == 'DVetMed')?'selected':'';?> >D Veterinary Medicine</option>
+
+                                        </select>
                 <br> 
                   
-                <label>Classification: </label> <input class="textfield" type="text" placeholder="JR" id="classification" name="classification" value="<?php echo($results['classification'] != ''?$results['classification']:'');?>"/> 
-                <br><br> 
+                                    <label for="classification">Classification</label>
+                                        <select name="classification" class="form-control input-lg">
+                                            <option value="F" <?php echo($results['classification'] == 'F')?'selected':'';?> >Freshman</option>
+                                            <option value="SO" <?php echo($results['classification'] == 'SO')?'selected':'';?>>Sophomore</option>
+                                            <option value="JR" <?php echo($results['classification'] == 'JR')?'selected':'';?>>Junior</option>
+                                            <option value="SR" <?php echo($results['classification'] == 'SR')?'selected':'';?>>Senior</option>
+                                            <option value="G" <?php echo($results['classification'] == 'G')?'selected':'';?>>Graduate</option>
+                                        </select>
+                                        <br/><br> 
                   
                 <label>Sex:</label> 
                         <input type="radio" name="sex" <?php echo($results['sex'] == 'M')?'checked':'';?> value="M" checked>Male 
                         <input type="radio" name="sex" <?php echo($results['sex'] == 'F')?'checked':'';?> value="F">Female 
-                <br> 
+                <br>
   
                 <label>Birthday: </label> 
                     <input class="textfield" type="text" placeholder="yyyy-mm-dd" name="birth_date" id="birth_date" value="<?php echo($results['birth_date'] != ''?$results['birth_date']:'');?>"/> 
